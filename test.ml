@@ -1,0 +1,6 @@
+
+
+let rec sumList l = 
+	match l with
+		[] -> 0
+		| h::t -> h + (sumList t)

@@ -1,0 +1,41 @@
+functional programming is paradigm that treats computation as the evaluation of mathematical functions and avoids changing and mutable data
+
+if  E then E else E
+	^-------------------if E then E else E
+
+let P = E in E2, P is valid in the scope of E2
+
+Primitives 
+
+ListsCons(::)
+1::2::[]
+[1]::[[2]]
+[1;2]::[[]]
+'a :: 'a list
+
+1::2 is not valid
+
+@ append examples 
+[1;2]@[3;4]
+but [1;2]::[3;4] is not valid
+
+pattern matching
+[h;t]  		2 elements list
+[h::t] 		a list of lists
+h::t   		a list with at least one element
+h;t    		invalid
+_	   		anything
+_::t   		top-most(the first)
+(x,y)::t 	first element matches to tuple directly
+
+let myfunction = function param -> body
+
+let add = function x -> function y -> x+y
+
+type annotation :
+better errors: instead of inferred types, you see expected types
+
+type point = float * float;;
+
+let get_x_annot ((x1,y1): point): float = x1;;
+let get_x1 (x1, y1) = x1;;
