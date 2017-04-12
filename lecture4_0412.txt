@@ -1,0 +1,156 @@
+let incLstBy l n = 
+	List.map (function x -> x+n) l;;
+
+let rec sumList l = 
+	match l with
+		[] -> 0
+		| h::t -> h + (sumList t)
+
+let rec prodList l = 
+	match l with 
+		[] -> 1
+		| h::t -> h + (sumList t)
+
+let rec combineInts (f: int -> int -> int)
+					(l: int list)  
+					(b: int) = 
+	match l with
+		[] -> b
+		| h::t -> f h （combineInts f t b)
+
+let rec fold_right f l b =
+	match l with
+		[] -> b
+		| h::t -> f h (fold_right f t b);;
+
+combineInts (fun x y -> x+y) [1;2;3;4] 0;;		10
+combineInts (fun x y -> x*y) [1;2;3;4] 0;;		24
+
+let length l = 
+	combineInts (fun x y -> y+1) l 0;;
+
+
+let allpos l = 
+	fold_right (fun elem restIsPos -> (elem > 0)&& restIsPos ) l true
+
+
+let all p l = 
+	fold_right (fun elem rest -> (p elem) && rest) l true
+
+List.for_all
+- : ('a -> bool) -> 'a list -> bool = <fun>
+
+[1;2;3]@[4;5;6];;
+
+recursively:
+let rec append l1 l2 = 
+	match l1 with
+	[] -> l2
+	| h:t -> h :: (append t l2)
+
+let append l1 l2 = 
+	fold_right (fun elem rest -> elem::rest) l1 l2;
+
+(*
+dupLst [1;2;3] -> [1;1;2;2;3;3]
+*）
+
+let dupLst l = 
+	fold_right (fun elem rest -> elem::elem::rest) l [];;
+
+first-class function
+
+List.fold_left;;
+
+List.fold_left (-) 0 [1;2;;3;4];;     -10;
+((((0-1)-2)-3)-4) = -10
+
+List.fold_left2;;
+List.fold_right2;;
+
+let dotProd l1 l2 = 
+	List.fold_right2 (fun e1 e2 restDotProd -> e1*e2 + restDotProd) l1 l2 0;;
+
+(*
+	ocaml so far
+	================
+
+	Control structures: recursion and pattern matching 
+
+	Data strutures: Lists ang tuples
+
+	First-class functions (kind of both)
+
+	what's missing?
+
+	user-defined types (we'll see that now)
+
+	privacy/ protection/ encapsulation/
+		-Ocaml does that with modules (see later)
+
+*)
+
+(*
+	Ocaml lets you define your own datatypes
+
+	similar in spirit to structs in C, classes in Java
+
+	difference: datatypes are designed for 
+			-
+			-
+*)
+
+type sign = Pos | Neg | Zero;;  start with lowercase = start with uppercase
+
+let signOf n = 
+	match n with
+		0 -> Zero
+		| _ -> if n>0 then Pos else Neg;;
+
+signOf (-2)
+
+let signToInt s = 
+	match s with 
+	  Pos  -> 1
+	| Neg  -> -1
+	| Zero -> 0;;
+
+type point = Pt of float * float;;
+
+Pt (3.0, 4.0);;
+
+let negate p = 
+	match p with 
+		Pt (x,y) -> Pt(-. x, -. y);;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
