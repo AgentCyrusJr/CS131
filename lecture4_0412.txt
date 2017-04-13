@@ -9,7 +9,7 @@ let rec sumList l =
 let rec prodList l = 
 	match l with 
 		[] -> 1
-		| h::t -> h + (sumList t)
+		| h::t -> h * (prodList t);;
 
 let rec combineInts (f: int -> int -> int)
 					(l: int list)  
@@ -22,6 +22,8 @@ let rec fold_right f l b =
 	match l with
 		[] -> b
 		| h::t -> f h (fold_right f t b);;
+
+(f x1 (f x2 (f x3 ...(f xn))))
 
 combineInts (fun x y -> x+y) [1;2;3;4] 0;;		10
 combineInts (fun x y -> x*y) [1;2;3;4] 0;;		24
@@ -37,8 +39,14 @@ let allpos l =
 let all p l = 
 	fold_right (fun elem rest -> (p elem) && rest) l true
 
+(*
+val for_all : ('a -> bool) -> 'a list -> bool
+for_all p [a1; ...; an] checks if all elements of the list satisfy the predicate p. That is, it returns (p a1) && (p a2) && ... && (p an).
+*)
 List.for_all
 - : ('a -> bool) -> 'a list -> bool = <fun>
+
+let for_pos = List.for_all (fun x -> x>0);;
 
 [1;2;3]@[4;5;6];;
 
@@ -62,7 +70,7 @@ first-class function
 
 List.fold_left;;
 
-List.fold_left (-) 0 [1;2;;3;4];;     -10;
+List.fold_left (-) 0 [1;2;3;4];;     -10;
 ((((0-1)-2)-3)-4) = -10
 
 List.fold_left2;;
@@ -123,8 +131,15 @@ let negate p =
 	match p with 
 		Pt (x,y) -> Pt(-. x, -. y);;
 
+In class we saw the filter function, which retains only the elements of a list that satisfy a given predicate. Implement a function partition, which is similar except that it returns a pair of lists, where the first list contains the elements that satisfy the predicate and the second list contains the elements that falsify the predicate. The elements should retain the same relative ordering that they had in the original list.
 
-
+let rec partition f l = 
+	match l with
+		[] -> ([],[])
+		| head::tail -> 
+    		let (first, second) = partition f tail in 
+      			if f head then (head::first, second)
+      			else (first, head::second);;
 
 
 
