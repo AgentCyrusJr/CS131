@@ -1,0 +1,56 @@
+dynamic typechecking
+python
+
+polymorphism is covered in today's lecture
+
+*strongly typed* means that the type system achieves the above goal 100% of the time
+
+*weakly typed* means that there are certain type errors that the languages does not protect against 
+- it is possible to treat a value one type accidentally as if it has another type
+- implementation-dependent behavior
+- C/C++
+
+key issue: memory safety:
+	- memory errors in C
+		- out-of-bounds accesses
+			"buffer overrun"
+			the leading cause of security exploits
+		- dangling pointers
+			- free a pointer too early
+		- uninitialized pointers
+
+- how do strongly typed languages avoid these errors?
+	- pointers are hidden 
+	- run-time bounds checks on every array access
+	- garbage collection at run time to free memory
+		that's no longer used
+		- you can't manually free memory
+	- pointers must be initialized before use
+
+Summarize:
+
+static/ strong  : OCaml, Java, C#, 
+static/ weak    : C, C++
+dynamic/ strong : Javascript, Python, Lisp
+dynamic/ weak   : 
+
+can make types fancier to catch more errors at compile time
+example: transpose has type matrix -> matrix
+Better: matrix<m,n> -> matrix<n,m>
+
+
+==========exception==========
+why do they exist and what are they good for?
+
+an association list is a list of pairs
+lookup function
+how to deal with a key that is not in the list?
+- first idea: options
+
+
+Exception:
+clear initialization of an error
+clean separation of error handling code from ordinary functionality
+allow callers to easily pass through the error if they can't handle it
+
+

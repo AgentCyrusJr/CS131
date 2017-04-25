@@ -1,0 +1,49 @@
+Types
+===========
+
+What is a type:
+a set of values, along with the allowed operations on those values
+
+type int is the set of 64-bits integers operations: + - * / < > ...
+int list : [1;2], [5;25;17]
+op: @ :: pattern matching
+int * boolean: (1, false)
+
+what is the point of types?
+constrain what you can do with the data
+each value can only be manipulated using the operations of the value's type
+enforce abstraction boundaries, types are the abstractions - including user-defined types 
+basic form of program guarantee
+
+static typechecking:
+- every program expression, statement, function, is given a type at compile time
+- if something can't be given a type, then you get a compiler error
+examples: OCaml, C, C++, Java
+
+dynamic typechecking:
+- during execution , before execution any primitive operation, the types are argument values are checked. if they are of the wrong type, an exception is raised
+
+examples: Python, JavaScript, Ruby, Lisp
+
+main advantage of static typechecking:
+- early detection of errors (before program runs)
+- guarantees for all possible executions of the program (or of a function)
+	- if a function has type int -> bool
+		the function won't have *type errors* for any possible execution of the function. as long as you pass an int, it will give you back a bool
+
+secondary benefits of static typechecking:
+- program documentation
+- enforce user-defined types
+- efficiency 
+
+disadvantages of static typechecking:
+- dynamically typed languages are more flexible 
+- statically typed language can reject "good" programs
+
+type intOfFloat = I of int | F of float
+[I 1; F 2.2; F 3.3]
+
+
+
+
+
